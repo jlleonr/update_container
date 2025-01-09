@@ -19,7 +19,7 @@ do
     if [[ ! -d "${lookupDir}${i}" ]];
     then
         echo "No container with name: ${i} found in: ${lookupDir}" >&2
-        exit 1
+        continue
     fi
 
     # Move to lookup dir, exit if error
@@ -62,10 +62,15 @@ do
 
 done    # end for loop
 
-echo ""
-echo "Removing old images..."
-echo ""
+danglingImagesCheck=$(docker image ls | grep "<none>" | awk '{ print $3 }')
 
-docker image prune -fa
+if [[ -n "${danglingImagesCheck}" ]];
+then
+    echo ""
+    echo "Removing old images..."
+    echo ""
+
+    docker image prune -fa
+fi
 
 exit 0
