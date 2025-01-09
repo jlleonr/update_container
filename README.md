@@ -1,6 +1,6 @@
 # Update Container
 - Script to update a single Docker container.
-- Usage: `./update_container.sh 'container name'`
+- Usage: `./update_container.sh 'list of container names'`
   - Example: `./update_container.sh grafana`
 
 ## Workflow
